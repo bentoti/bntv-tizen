@@ -1,14 +1,14 @@
-<h1 align="center">Jellyfin for Tizen</h1>
-<h3 align="center">Part of the <a href="https://jellyfin.org">Jellyfin Project</a></h3>
+<h1 align="center">bntv for Tizen</h1>
+<h3 align="center">Part of the <a href="https://maxi.tv.br.org">bntv Project</a></h3>
 
 ---
 
 <p align="center">
-<img alt="Logo Banner" src="https://raw.githubusercontent.com/jellyfin/jellyfin-ux/master/branding/SVG/banner-logo-solid.svg?sanitize=true"/>
+<img alt="Logo Banner" src="https://raw.githubusercontent.com/bntv/bntv-ux/master/branding/SVG/banner-logo-solid.svg?sanitize=true"/>
 </p>
 
 ## Build Process
-_Also look [Wiki](https://github.com/jellyfin/jellyfin-tizen/wiki)._
+_Also look [Wiki](https://github.com/bentoti/bntv-tizen/wiki)._
 
 ### Prerequisites
 * Tizen Studio 4.6+ with IDE or Tizen Studio 4.6+ with CLI (<a href="https://developer.tizen.org/development/tizen-studio/download">https://developer.tizen.org/development/tizen-studio/download</a>)
@@ -20,54 +20,54 @@ _Also look [Wiki](https://github.com/jellyfin/jellyfin-tizen/wiki)._
 1. Install prerequisites.
 2. Install Certificate Manager using Tizen Studio Package Manager.
 3. Setup Tizen certificate in Certificate Manager.
-4. Clone or download Jellyfin Web repository (<a href="https://github.com/jellyfin/jellyfin-web">https://github.com/jellyfin/jellyfin-web</a>).
+4. Clone or download bntv Web repository (<a href="https://github.com/bentoti/bntv-tizen">https://github.com/bentoti/bntv-tizen</a>).
 
    > It is recommended that the web version match the server version.
 
    ```sh
-   git clone -b release-10.8.z https://github.com/jellyfin/jellyfin-web.git
+   git clone -b release-10.8.z https://github.com/bentoti/bntv-tizen
    ```
    > Replace `release-10.8.z` with the name of the branch you want to build.
 
    > You can also use `git checkout` to switch branches.
-5. Clone or download Jellyfin Tizen (this) repository.
+5. Clone or download bntv Tizen (this) repository.
    ```sh
-   git clone https://github.com/jellyfin/jellyfin-tizen.git
+   git clone https://github.com/bentoti/bntv-tizen
    ```
 
-### Build Jellyfin Web
+### Build BnTV Web
 
 ```sh
-cd jellyfin-web
+cd bntv-web
 SKIP_PREPARE=1 npm ci --no-audit
 USE_SYSTEM_FONTS=1 npm run build:production
 ```
 
-> You should get `jellyfin-web/dist/` directory.
+> You should get `bntv-web/dist/` directory.
 
 > `SKIP_PREPARE=1` can be omitted for 10.9+.
 
-> `USE_SYSTEM_FONTS=1` is required to discard unused fonts and to reduce the size of the app. (Since Jellyfin Web 10.9)
+> `USE_SYSTEM_FONTS=1` is required to discard unused fonts and to reduce the size of the app. (Since bntv Web 10.9)
 
 > Use `npm run build:development` if you want to debug the app.
 
-If any changes are made to `jellyfin-web/`, the `jellyfin-web/dist/` directory will need to be rebuilt using the command above.
+If any changes are made to `bntv-web/`, the `bntv-web/dist/` directory will need to be rebuilt using the command above.
 
 ### Prepare Interface
 
 ```sh
-cd jellyfin-tizen
-JELLYFIN_WEB_DIR=../jellyfin-web/dist npm ci --no-audit
+cd bntv-tizen
+bntv_WEB_DIR=../bntv-web/dist npm ci --no-audit
 ```
 
-> You should get `jellyfin-tizen/www/` directory.
+> You should get `bntv-tizen/www/` directory.
 
-> The `JELLYFIN_WEB_DIR` environment variable can be used to override the location of `jellyfin-web`.
+> The `BNTV_WEB_DIR` environment variable can be used to override the location of `bntv-web`.
 
-> Add `DISCARD_UNUSED_FONTS=1` environment variable to discard unused fonts and to reduce the size of the app. (Until Jellyfin Web 10.9)  
-> Don't use it with Jellyfin Web 10.9+. Instead, use `USE_SYSTEM_FONTS=1` environment variable when building Jellyfin Web.
+> Add `DISCARD_UNUSED_FONTS=1` environment variable to discard unused fonts and to reduce the size of the app. (Until bntv Web 10.9)  
+> Don't use it with bntv Web 10.9+. Instead, use `USE_SYSTEM_FONTS=1` environment variable when building bntv Web.
 
-If any changes are made to `jellyfin-web/dist/`, the `jellyfin-tizen/www/` directory will need to be rebuilt using the command above.
+If any changes are made to `bntv-web/dist/`, the `bntv-tizen/www/` directory will need to be rebuilt using the command above.
 
 ### Build WGT
 
@@ -78,7 +78,7 @@ tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "pack
 tizen package -t wgt -o . -- .buildResult
 ```
 
-> You should get `Jellyfin.wgt`.
+> You should get `.wgt`.
 
 ## Deployment
 
@@ -87,7 +87,7 @@ tizen package -t wgt -o . -- .buildResult
 1. Run emulator.
 2. Install package.
    ```sh
-   tizen install -n Jellyfin.wgt -t T-samsung-5.5-x86
+   tizen install -n bntv.wgt -t T-samsung-5.5-x86
    ```
    > Specify target with `-t` option. Use `sdb devices` to list them.
 
@@ -103,7 +103,7 @@ tizen package -t wgt -o . -- .buildResult
    > TODO: Find a command
 5. Install package.
    ```sh
-   tizen install -n Jellyfin.wgt -t UE65NU7400
+   tizen install -n bntv.wgt -t UE65NU7400
    ```
    > Specify target with `-t` option. Use `sdb devices` to list them.
 # bntv-tizen
